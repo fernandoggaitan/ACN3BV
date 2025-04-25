@@ -9,4 +9,9 @@ class Curso extends Model
 {
     /** @use HasFactory<\Database\Factories\CursoFactory> */
     use HasFactory;
+
+    //protected $table = 'cursos';
+
+    protected $fillable = ['titulo', 'descripcion', 'precio'];
+
 }

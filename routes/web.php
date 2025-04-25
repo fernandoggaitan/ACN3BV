@@ -4,6 +4,7 @@ use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CursoController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -12,6 +13,12 @@ Route::get('/', function () {
 Route::get('prueba', function(){
     return 'Hola, soy una página de prueba';
 });
+
+//Gestor de cursos.
+Route::get('cursos', [
+    CursoController::class,
+    'index'
+]);
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])

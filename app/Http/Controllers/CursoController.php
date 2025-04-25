@@ -12,7 +12,14 @@ class CursoController extends Controller
      */
     public function index()
     {
-        //
+
+        $cursos = Curso::select( ['id', 'titulo', 'precio'] )
+            ->orderBy('precio')
+            ->get();
+        return view('cursos.index', [
+            'titulo' => 'Lista de cursos',
+            'cursos' => $cursos
+        ]);
     }
 
     /**
