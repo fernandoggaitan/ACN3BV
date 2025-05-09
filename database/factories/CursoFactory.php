@@ -17,7 +17,9 @@ class CursoFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'titulo' => fake()->word(),
+            'descripcion' => fake()->text(),
+            'precio' => fake()->numberBetween(1000, 999999)
         ];
     }
 }

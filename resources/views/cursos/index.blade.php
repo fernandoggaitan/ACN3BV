@@ -1,7 +1,13 @@
-<x-layouts.app title="Dashboard">
+<x-layouts.app title="Lista de cursos">
+
+    @if (session('status'))
+        <x-alertas.success>
+            {{ session('status') }}
+        </x-alertas.success>
+    @endif
 
     <div class="mb-5">
-        <x-botones.enlace href=""> Agregar nuevo </x-botones.enlace>
+        <x-botones.enlace href="{{ route('cursos.create') }}"> Agregar nuevo </x-botones.enlace>
     </div>
 
     <div class="relative overflow-x-auto">
@@ -32,7 +38,7 @@
                             {{ $c->titulo }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $c->precio }}
+                            {{ $c->precio_format() }}
                         </td>
                         <td class="px-6 py-4">
                             <x-botones.enlace href=""> Ingresar </x-botones.enlace>
@@ -42,5 +48,7 @@
             </tbody>
         </table>
     </div>
+
+    {{ $cursos->links() }}
 
 </x-layouts.app>

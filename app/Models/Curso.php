@@ -14,4 +14,9 @@ class Curso extends Model
 
     protected $fillable = ['titulo', 'descripcion', 'precio'];
 
+    public function precio_format()
+    {
+        return '$' . number_format($this->precio, 2, ',', '.');
+    }
+
 }

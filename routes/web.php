@@ -15,10 +15,24 @@ Route::get('prueba', function(){
 });
 
 //Gestor de cursos.
+
+//Método index
 Route::get('cursos', [
     CursoController::class,
     'index'
-]);
+])->name('cursos.index');
+
+//Método create
+Route::get('cursos/create', [
+    CursoController::class,
+    'create'
+])->name('cursos.create');
+
+//Método store
+Route::post('cursos', [
+    CursoController::class,
+    'store'
+])->name('cursos.store');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
