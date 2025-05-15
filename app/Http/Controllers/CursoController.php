@@ -14,6 +14,7 @@ class CursoController extends Controller
     {
 
         $cursos = Curso::select( ['id', 'titulo', 'precio'] )
+            ->where('visible', true)
             ->orderBy('id', 'desc')
             ->paginate(10);
         return view('cursos.index', [
@@ -35,6 +36,13 @@ class CursoController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'titulo' => 'required|max:100',
+            'descripcion' => 'required',
+            'precio' => 'numeric|max:1000000'
+        ]);
+
         Curso::create([
             'titulo' => $request->titulo,
             'descripcion' => $request->descripcion,
@@ -50,7 +58,7 @@ class CursoController extends Controller
      */
     public function show(Curso $curso)
     {
-        //
+        return $curso;
     }
 
     /**
@@ -58,7 +66,9 @@ class CursoController extends Controller
      */
     public function edit(Curso $curso)
     {
-        //
+        return view('cursos.edit', [
+            'curso' => $curso
+        ]);
     }
 
     /**
@@ -66,7 +76,21 @@ class CursoController extends Controller
      */
     public function update(Request $request, Curso $curso)
     {
-        //
+
+        $request->validate([
+            'titulo' => 'required|max:100',
+            'descripcion' => 'required',
+            'precio' => 'numeric|max:1000000'
+        ]);
+
+        $curso->update([
+            'titulo' => $request->titulo,
+            'descripcion' => $request->descripcion,
+            'precio' => $request->precio
+        ]);
+        return redirect()
+            ->route('cursos.index')
+            ->with('status', 'El curso se ha modificado correctamente.');
     }
 
     /**
@@ -74,6 +98,12 @@ class CursoController extends Controller
      */
     public function destroy(Curso $curso)
     {
-        //
+        //$curso->delete();
+        $curso->update([
+            'visible' => false
+        ]);
+        return redirect()
+            ->route('cursos.index')
+            ->with('status', 'El curso se ha eliminado correctamente.');
     }
 }

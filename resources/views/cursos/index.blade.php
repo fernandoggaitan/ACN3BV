@@ -41,7 +41,14 @@
                             {{ $c->precio_format() }}
                         </td>
                         <td class="px-6 py-4">
-                            <x-botones.enlace href=""> Ingresar </x-botones.enlace>
+                            <div class="inline-flex rounded-md shadow-xs" role="group">
+                                <x-botones.enlace href="{{ route('cursos.edit', $c) }}"> Editar </x-botones.enlace>
+                                <form action="{{ route('cursos.destroy', $c) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <x-botones.btn-danger type="submit"> Eliminar </x-botones.btn-danger>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @endforeach

@@ -34,6 +34,30 @@ Route::post('cursos', [
     'store'
 ])->name('cursos.store');
 
+//Método show.
+Route::get('cursos/{curso}', [
+    CursoController::class,
+    'show'
+])->name('cursos.show');
+
+//Método edit.
+Route::get('cursos/{curso}/edit', [
+    CursoController::class,
+    'edit'
+])->name('cursos.edit');
+
+//Método update.
+Route::put('cursos/{curso}', [
+    CursoController::class,
+    'update'
+])->name('cursos.update');
+
+//Método destroy.
+Route::delete('cursos/{curso}', [
+    CursoController::class,
+    'destroy'
+])->name('cursos.destroy');
+
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
