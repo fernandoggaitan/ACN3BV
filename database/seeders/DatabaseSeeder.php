@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Curso;
 use App\Models\User;
+use App\Models\Comment;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -30,7 +31,14 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('1234')
         ]);
 
+        //Creamos varios usuarios aleatorios.
+        $users = User::factory(9)->create();
+
+        //Cursos aleatorios.
         Curso::factory(500)->create();
+
+        //Creamos 500 comentarios aleatorios.
+        Comment::factory(500)->create();
 
     }
 }
