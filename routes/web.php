@@ -16,7 +16,10 @@ Route::get('prueba', function(){
 });
 
 //Gestor de cursos.
-Route::resource('cursos', CursoController::class)->except(['show']);
+Route::resource(
+    'cursos', 
+    CursoController::class)->except(['show']
+)->middleware(['auth', 'verified', 'is_admin']);
 
 Route::resource('comments', CommentController::class);
 

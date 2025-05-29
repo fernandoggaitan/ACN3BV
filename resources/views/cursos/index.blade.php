@@ -14,16 +14,16 @@
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3 w-1/4">
                         ID
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3 w-1/4">
                         Título
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3 w-1/4">
                         Precio
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3 w-1/4" colspan="2">
                         Acciones
                     </th>
                 </tr>
@@ -41,14 +41,14 @@
                             {{ $c->precio_format() }}
                         </td>
                         <td class="px-6 py-4">
-                            <div class="inline-flex rounded-md shadow-xs" role="group">
-                                <x-botones.enlace href="{{ route('cursos.edit', $c) }}"> Editar </x-botones.enlace>
-                                <form action="{{ route('cursos.destroy', $c) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <x-botones.btn-danger type="submit"> Eliminar </x-botones.btn-danger>
-                                </form>
-                            </div>
+                            <x-botones.enlace href="{{ route('cursos.edit', $c) }}"> Editar </x-botones.enlace>                            
+                        </td>
+                        <td class="px-6 py-4">
+                            <form action="{{ route('cursos.destroy', $c) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <x-botones.btn-danger type="submit"> Eliminar </x-botones.btn-danger>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Curso;
 use App\Models\User;
 use App\Models\Comment;
+use App\Models\Role;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -25,7 +26,7 @@ class DatabaseSeeder extends Seeder
         ]);
         */
 
-        User::factory()->create([
+        $admin = User::factory()->create([
             'name' => 'Fernando',
             'email' => 'fernando.gaitan@davinci.edu.ar',
             'password' => Hash::make('1234')
@@ -39,6 +40,25 @@ class DatabaseSeeder extends Seeder
 
         //Creamos 500 comentarios aleatorios.
         Comment::factory(500)->create();
+
+        //Creamos los roles.
+        $roles = ['Administrador', 'Profesor', 'Alumno'];
+
+        foreach($roles as $r){
+            Role::create([
+                'name' => $r
+            ]);
+        }
+
+        //Agregamos roles.
+        $admin->roles()->sync( [1, 2] );
+
+        //Lo hizo deepseek.
+        $users->each(function ($user) {
+            $roles = rand(0, 100) < 30 ? [2, 3] : [rand(2, 3)];
+            $user->roles()->sync($roles);
+        });
+
 
     }
 }
