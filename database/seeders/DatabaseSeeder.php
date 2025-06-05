@@ -6,6 +6,7 @@ use App\Models\Curso;
 use App\Models\User;
 use App\Models\Comment;
 use App\Models\Role;
+use App\Models\Task;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -59,6 +60,8 @@ class DatabaseSeeder extends Seeder
             $user->roles()->sync($roles);
         });
 
+        //Tareas aleatorioas.
+        Task::factory(10)->create();
 
     }
 }
