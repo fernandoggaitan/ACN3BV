@@ -12,7 +12,7 @@ class Curso extends Model
 
     //protected $table = 'cursos';
 
-    protected $fillable = ['titulo', 'descripcion', 'precio', 'visible'];
+    protected $fillable = ['titulo', 'descripcion', 'precio', 'visible', 'imagen'];
 
     public function precio_format()
     {

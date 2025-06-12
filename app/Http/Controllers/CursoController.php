@@ -13,7 +13,7 @@ class CursoController extends Controller
     public function index()
     {
 
-        $cursos = Curso::select( ['id', 'titulo', 'precio'] )
+        $cursos = Curso::select( ['id', 'titulo', 'precio', 'imagen'] )
             ->where('visible', true)
             ->orderBy('id', 'desc')
             ->paginate(10);
@@ -40,17 +40,31 @@ class CursoController extends Controller
         $request->validate([
             'titulo' => 'required|max:100',
             'descripcion' => 'required',
-            'precio' => 'numeric|max:1000000'
+            'precio' => 'numeric|max:1000000',
+            'imagen' => 'nullable|file|mimes:jpg,jpeg,png'
         ]);
+
+        $imagen = null;
+
+        if( $request->hasFile('imagen') ){
+            //Verificamos si el archivo existe.
+            //Nombre del archivo cómo lo subió el usuario.
+            $imagen_nombre = $request->file('imagen')->getClientOriginalName();
+            //Path del archivo cómo se va a guardar en la base de datos.
+            $imagen = $request->file('imagen')->storeAs('cursos', (time() . $imagen_nombre), 'public');
+        }
 
         Curso::create([
             'titulo' => $request->titulo,
             'descripcion' => $request->descripcion,
-            'precio' => $request->precio
+            'precio' => $request->precio,
+            'imagen' => $imagen
         ]);
+
         return redirect()
             ->route('cursos.index')
             ->with('status', 'El curso se ha creado correctamente.');
+
     }
 
     /**

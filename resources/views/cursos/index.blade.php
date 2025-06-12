@@ -15,7 +15,7 @@
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3 w-1/4">
-                        ID
+                        Imagen
                     </th>
                     <th scope="col" class="px-6 py-3 w-1/4">
                         Título
@@ -32,7 +32,9 @@
                 @foreach ($cursos as $c)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ $c->id }}
+                            @if ($c->imagen)
+                                <img style="max-width: 50px;" src="{{ asset('storage/' . $c->imagen) }}" alt="{{ $c->titulo }}" />
+                            @endif
                         </th>
                         <td class="px-6 py-4">
                             {{ $c->titulo }}
